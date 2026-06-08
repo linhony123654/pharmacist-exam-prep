@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Search, Menu, X } from 'lucide-react';
+import { Sun, Moon, Search, Menu, X, Bot, ClipboardList } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { useSearch } from './SearchOverlay';
 
@@ -10,6 +10,11 @@ const volumes = [
   { num: 'III', title: '药学专业知识（一）精讲', path: '/vol/3' },
   { num: 'IV', title: '药学专业知识（二）精讲', path: '/vol/4' },
   { num: 'V', title: '药学综合知识与技能精讲', path: '/vol/5' },
+];
+
+const practiceLinks = [
+  { path: '/ai-generator', icon: <Bot size={16} />, title: 'AI出题助手', desc: '智能生成练习题' },
+  { path: '/exam', icon: <ClipboardList size={16} />, title: '模拟考试', desc: '生成完整试卷' },
 ];
 
 export default function Navbar() {
@@ -135,6 +140,65 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+
+          {/* Practice Section */}
+          <div className="mt-6 pt-6 border-t" style={{ borderColor: 'var(--border)' }}>
+            <p
+              className="px-4 mb-2 text-ui-sm"
+              style={{ color: 'var(--ink-quaternary)' }}
+            >
+              专项练习
+            </p>
+            <ul className="space-y-1">
+              {practiceLinks.map((link, i) => (
+                <li
+                  key={link.path}
+                  className={`
+                    transform transition-all duration-500
+                    ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}
+                  `}
+                  style={{
+                    transitionDelay: mounted ? `${0.5 + i * 0.08}s` : '0s',
+                  }}
+                >
+                  <Link
+                    to={link.path}
+                    className={`
+                      flex items-center gap-3 px-4 py-2.5 border-l-[3px] transition-all duration-300
+                      ${isActive(link.path)
+                        ? 'bg-[var(--accent-rust-light)]'
+                        : 'border-transparent hover:bg-[var(--paper-dark)] hover:border-[var(--border)]'
+                      }
+                    `}
+                    style={{
+                      borderLeftColor: isActive(link.path) ? 'var(--sidebar-active)' : 'transparent',
+                    }}
+                  >
+                    <span
+                      className="flex-shrink-0"
+                      style={{ color: isActive(link.path) ? 'var(--accent-rust)' : 'var(--ink-tertiary)' }}
+                    >
+                      {link.icon}
+                    </span>
+                    <div>
+                      <span
+                        className="font-chinese-sans text-sm leading-snug block"
+                        style={{ color: 'var(--sidebar-text)' }}
+                      >
+                        {link.title}
+                      </span>
+                      <span
+                        className="text-xs"
+                        style={{ color: 'var(--ink-quaternary)' }}
+                      >
+                        {link.desc}
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </nav>
 
         {/* Bottom Actions */}
