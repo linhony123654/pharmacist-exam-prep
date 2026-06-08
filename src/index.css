@@ -98,6 +98,129 @@
     --ring: 240 4.9% 83.9%;
   }
 
+  /* ========== NatGeo Theme ========== */
+  .theme-natgeo {
+    --paper: #0A0A0A;
+    --paper-dark: #141414;
+    --ink: #F0F0F0;
+    --ink-secondary: #B8B8B8;
+    --ink-tertiary: #888888;
+    --ink-quaternary: #555555;
+    --accent-rust: #FFCC00;
+    --accent-rust-light: #332A00;
+    --accent-olive: #7A9B7D;
+    --accent-olive-light: #1A2A1A;
+    --accent-gold: #FFCC00;
+    --accent-gold-light: #332A00;
+    --border: #333333;
+    --border-light: #222222;
+    --sidebar-bg: #141414;
+    --sidebar-active: #FFCC00;
+    --sidebar-text: #B8B8B8;
+    --sidebar-text-active: #F0F0F0;
+    --overlay: rgba(0, 0, 0, 0.7);
+
+    --background: 0 0% 4%;
+    --foreground: 0 0% 94%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 94%;
+    --primary: 48 100% 50%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 94%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 94%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 48 100% 50%;
+  }
+
+  /* ========== Nature Theme ========== */
+  .theme-nature {
+    --paper: #E8EDF2;
+    --paper-dark: #DDE4EC;
+    --ink: #1A2F4A;
+    --ink-secondary: #3D5A80;
+    --ink-tertiary: #6B8FB5;
+    --ink-quaternary: #98B5D0;
+    --accent-rust: #2E5C4F;
+    --accent-rust-light: #D4E5E0;
+    --accent-olive: #4A7C59;
+    --accent-olive-light: #D4E5D8;
+    --accent-gold: #C9A84C;
+    --accent-gold-light: #F5F0E0;
+    --border: #C5D0DC;
+    --border-light: #DDE4EC;
+    --sidebar-bg: #DDE4EC;
+    --sidebar-active: #2E5C4F;
+    --sidebar-text: #3D5A80;
+    --sidebar-text-active: #E8EDF2;
+    --overlay: rgba(26, 47, 74, 0.45);
+
+    --background: 210 20% 94%;
+    --foreground: 213 48% 19%;
+    --card: 210 20% 94%;
+    --card-foreground: 213 48% 19%;
+    --primary: 160 32% 27%;
+    --primary-foreground: 210 20% 94%;
+    --secondary: 210 20% 90%;
+    --secondary-foreground: 213 48% 19%;
+    --muted: 210 20% 90%;
+    --muted-foreground: 213 30% 50%;
+    --accent: 210 20% 90%;
+    --accent-foreground: 213 48% 19%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 20% 80%;
+    --input: 210 20% 80%;
+    --ring: 160 32% 27%;
+  }
+
+  /* ========== Cell Theme ========== */
+  .theme-cell {
+    --paper: #F5F0EB;
+    --paper-dark: #EBE5DE;
+    --ink: #2D1810;
+    --ink-secondary: #5C3D2E;
+    --ink-tertiary: #8A6B5C;
+    --ink-quaternary: #B5A094;
+    --accent-rust: #8B1E3F;
+    --accent-rust-light: #F0D4DC;
+    --accent-olive: #3D6B5C;
+    --accent-olive-light: #D4E5E0;
+    --accent-gold: #A67C52;
+    --accent-gold-light: #F0E6D8;
+    --border: #D4C8BC;
+    --border-light: #E5DDD4;
+    --sidebar-bg: #EBE5DE;
+    --sidebar-active: #8B1E3F;
+    --sidebar-text: #5C3D2E;
+    --sidebar-text-active: #F5F0EB;
+    --overlay: rgba(45, 24, 16, 0.45);
+
+    --background: 30 20% 94%;
+    --foreground: 15 47% 12%;
+    --card: 30 20% 94%;
+    --card-foreground: 15 47% 12%;
+    --primary: 340 66% 33%;
+    --primary-foreground: 30 20% 94%;
+    --secondary: 30 20% 90%;
+    --secondary-foreground: 15 47% 12%;
+    --muted: 30 20% 90%;
+    --muted-foreground: 15 30% 45%;
+    --accent: 30 20% 90%;
+    --accent-foreground: 15 47% 12%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 20% 78%;
+    --input: 30 20% 78%;
+    --ring: 340 66% 33%;
+  }
+
   /* ========== Global Typography ========== */
   html {
     scroll-behavior: smooth;

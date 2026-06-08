@@ -1,11 +1,20 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 
-type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark' | 'natgeo' | 'nature' | 'cell';
+
+const THEME_CLASSES: Record<Theme, string> = {
+  light: '',
+  dark: 'dark',
+  natgeo: 'theme-natgeo',
+  nature: 'theme-nature',
+  cell: 'theme-cell',
+};
 
 interface ThemeContextType {
   theme: Theme;
-  toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
+  themes: Theme[];
 }
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -19,10 +28,12 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
+  const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('theme') as Theme | null;
-      if (stored) return stored;
+      if (stored && ['light', 'dark', 'natgeo', 'nature', 'cell'].includes(stored)) {
+        return stored;
+      }
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     return 'light';
@@ -30,20 +41,24 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
+    // Remove all theme classes
+    Object.values(THEME_CLASSES).forEach((cls) => {
+      if (cls) root.classList.remove(cls);
+    });
+    // Add current theme class
+    const cls = THEME_CLASSES[theme];
+    if (cls) root.classList.add(cls);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = useCallback(() => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  const setTheme = useCallback((t: Theme) => {
+    setThemeState(t);
   }, []);
 
+  const themes: Theme[] = ['light', 'dark', 'natgeo', 'nature', 'cell'];
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, themes }}>
       {children}
     </ThemeContext.Provider>
   );

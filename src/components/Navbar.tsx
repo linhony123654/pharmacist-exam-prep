@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Search, Menu, X, Bot, ClipboardList } from 'lucide-react';
+import { Sun, Moon, Search, Menu, X, Bot, ClipboardList, Settings } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 import { useSearch } from './SearchOverlay';
+import SettingsModal from './SettingsModal';
 
 const volumes = [
   { num: 'I', title: '备考全攻略', path: '/vol/1' },
@@ -13,15 +14,20 @@ const volumes = [
 ];
 
 const practiceLinks = [
+  { path: '/quiz.html', icon: <span>📚</span>, title: '真题题库', desc: '2020-2025 历年真题', external: true },
+  { path: '/practice/calc', icon: <span>🧮</span>, title: '计算题训练', desc: '西药一 · 步骤解析' },
+  { path: '/practice/btype', icon: <span>🔗</span>, title: '配伍选择题', desc: '西药二 · B型题40分' },
+  { path: '/practice/case', icon: <span>📋</span>, title: '案例分析题', desc: '药综 · 占30分' },
   { path: '/ai-generator', icon: <Bot size={16} />, title: 'AI出题助手', desc: '智能生成练习题' },
   { path: '/exam', icon: <ClipboardList size={16} />, title: '模拟考试', desc: '生成完整试卷' },
 ];
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { openSearch } = useSearch();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -68,7 +74,7 @@ export default function Navbar() {
       {/* Sidebar Navigation */}
       <aside
         className={`
-          fixed top-0 left-0 h-full w-[280px] z-sidebar flex flex-col
+          fixed top-0 left-0 h-full w-[280px] z-[80] flex flex-col
           border-r transition-transform duration-[600ms]
           lg:translate-x-0
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
@@ -99,6 +105,28 @@ export default function Navbar() {
 
         {/* Volume Navigation */}
         <nav className="flex-1 px-4 py-4 overflow-y-auto">
+          {/* 特别注意 */}
+          <ul className="space-y-1 mb-4">
+            <li>
+              <Link
+                to="/special"
+                className={`
+                  flex items-center gap-3 px-4 py-3 border-l-[3px] transition-all duration-300
+                  ${isActive('/special')
+                    ? 'bg-[var(--accent-rust-light)]'
+                    : 'border-transparent hover:bg-[var(--paper-dark)] hover:border-[var(--border)]'
+                  }
+                `}
+                style={{
+                  borderLeftColor: isActive('/special') ? 'var(--sidebar-active)' : 'transparent',
+                }}
+              >
+                <span style={{ color: isActive('/special') ? 'var(--accent-rust)' : 'var(--ink-tertiary)' }}>★</span>
+                <span className="font-chinese-sans text-sm" style={{ color: 'var(--sidebar-text)' }}>特别注意</span>
+              </Link>
+            </li>
+          </ul>
+          <div className="border-b mb-4" style={{ borderColor: 'var(--border)' }} />
           <ul className="space-y-1">
             {volumes.map((vol, i) => (
               <li
@@ -161,40 +189,62 @@ export default function Navbar() {
                     transitionDelay: mounted ? `${0.5 + i * 0.08}s` : '0s',
                   }}
                 >
-                  <Link
-                    to={link.path}
-                    className={`
-                      flex items-center gap-3 px-4 py-2.5 border-l-[3px] transition-all duration-300
-                      ${isActive(link.path)
-                        ? 'bg-[var(--accent-rust-light)]'
-                        : 'border-transparent hover:bg-[var(--paper-dark)] hover:border-[var(--border)]'
-                      }
-                    `}
-                    style={{
-                      borderLeftColor: isActive(link.path) ? 'var(--sidebar-active)' : 'transparent',
-                    }}
-                  >
-                    <span
-                      className="flex-shrink-0"
-                      style={{ color: isActive(link.path) ? 'var(--accent-rust)' : 'var(--ink-tertiary)' }}
+                  {'external' in link && link.external ? (
+                    <a
+                      href={link.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 px-4 py-2.5 border-l-[3px] border-transparent hover:bg-[var(--paper-dark)] hover:border-[var(--border)] transition-all duration-300"
+                      style={{ borderLeftColor: 'transparent' }}
                     >
-                      {link.icon}
-                    </span>
-                    <div>
-                      <span
-                        className="font-chinese-sans text-sm leading-snug block"
-                        style={{ color: 'var(--sidebar-text)' }}
-                      >
-                        {link.title}
+                      <span className="flex-shrink-0" style={{ color: 'var(--ink-tertiary)' }}>
+                        {link.icon}
                       </span>
+                      <div>
+                        <span className="font-chinese-sans text-sm leading-snug block" style={{ color: 'var(--sidebar-text)' }}>
+                          {link.title}
+                        </span>
+                        <span className="text-xs" style={{ color: 'var(--ink-quaternary)' }}>
+                          {link.desc}
+                        </span>
+                      </div>
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className={`
+                        flex items-center gap-3 px-4 py-2.5 border-l-[3px] transition-all duration-300
+                        ${isActive(link.path)
+                          ? 'bg-[var(--accent-rust-light)]'
+                          : 'border-transparent hover:bg-[var(--paper-dark)] hover:border-[var(--border)]'
+                        }
+                      `}
+                      style={{
+                        borderLeftColor: isActive(link.path) ? 'var(--sidebar-active)' : 'transparent',
+                      }}
+                    >
                       <span
-                        className="text-xs"
-                        style={{ color: 'var(--ink-quaternary)' }}
+                        className="flex-shrink-0"
+                        style={{ color: isActive(link.path) ? 'var(--accent-rust)' : 'var(--ink-tertiary)' }}
                       >
-                        {link.desc}
+                        {link.icon}
                       </span>
-                    </div>
-                  </Link>
+                      <div>
+                        <span
+                          className="font-chinese-sans text-sm leading-snug block"
+                          style={{ color: 'var(--sidebar-text)' }}
+                        >
+                          {link.title}
+                        </span>
+                        <span
+                          className="text-xs"
+                          style={{ color: 'var(--ink-quaternary)' }}
+                        >
+                          {link.desc}
+                        </span>
+                      </div>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -204,7 +254,7 @@ export default function Navbar() {
         {/* Bottom Actions */}
         <div className="px-6 py-6 border-t flex items-center gap-3" style={{ borderColor: 'var(--border)' }}>
           <button
-            onClick={toggleTheme}
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             className="w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300 hover:bg-[var(--paper-dark)] group"
             style={{ borderColor: 'var(--border)' }}
             aria-label="Toggle theme"
@@ -235,7 +285,22 @@ export default function Navbar() {
               style={{ color: 'var(--ink-tertiary)' }}
             />
           </button>
+          <button
+            onClick={() => setSettingsOpen(true)}
+            className="w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300 hover:bg-[var(--paper-dark)] group"
+            style={{ borderColor: 'var(--border)' }}
+            aria-label="Settings"
+          >
+            <Settings
+              size={16}
+              className="transition-colors group-hover:text-[var(--accent-rust)]"
+              style={{ color: 'var(--ink-tertiary)' }}
+            />
+          </button>
         </div>
+
+        {/* Settings Modal */}
+        <SettingsModal open={settingsOpen} onOpenChange={setSettingsOpen} />
 
         {/* Mobile Close Button */}
         <button

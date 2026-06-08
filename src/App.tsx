@@ -9,6 +9,10 @@ import Vol2Regulations from './pages/Vol2Regulations'
 import Vol3Pharmacy1 from './pages/Vol3Pharmacy1'
 import Vol4Pharmacy2 from './pages/Vol4Pharmacy2'
 import Vol5Practice from './pages/Vol5Practice'
+import SpecialAttention from './pages/SpecialAttention'
+import CalcPractice from './pages/CalcPractice'
+import BTypePractice from './pages/BTypePractice'
+import CasePractice from './pages/CasePractice'
 import AIGenerator from './pages/AIGenerator'
 import ExamPaper from './pages/ExamPaper'
 
@@ -24,9 +28,13 @@ export default function App() {
             <Route path="/vol/3" element={<Vol3Pharmacy1 />} />
             <Route path="/vol/4" element={<Vol4Pharmacy2 />} />
             <Route path="/vol/5" element={<Vol5Practice />} />
-            <Route path="/vol/:id" element={<VolumeStub />} />
+            <Route path="/special" element={<SpecialAttention />} />
+            <Route path="/practice/calc" element={<CalcPractice />} />
+            <Route path="/practice/btype" element={<BTypePractice />} />
+            <Route path="/practice/case" element={<CasePractice />} />
             <Route path="/ai-generator" element={<AIGenerator />} />
             <Route path="/exam" element={<ExamPaper />} />
+            <Route path="/vol/:id" element={<VolumeStub />} />
           </Route>
         </Routes>
       </SearchProvider>
