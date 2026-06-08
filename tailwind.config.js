@@ -5,11 +5,35 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        paper: 'var(--paper)',
+        'paper-dark': 'var(--paper-dark)',
+        ink: 'var(--ink)',
+        'ink-secondary': 'var(--ink-secondary)',
+        'ink-tertiary': 'var(--ink-tertiary)',
+        'ink-quaternary': 'var(--ink-quaternary)',
+        'accent-rust': 'var(--accent-rust)',
+        'accent-rust-light': 'var(--accent-rust-light)',
+        'accent-olive': 'var(--accent-olive)',
+        'accent-olive-light': 'var(--accent-olive-light)',
+        'accent-gold': 'var(--accent-gold)',
+        'accent-gold-light': 'var(--accent-gold-light)',
+        border: 'var(--border)',
+        'border-light': 'var(--border-light)',
+        'sidebar-bg': 'var(--sidebar-bg)',
+        'sidebar-active': 'var(--sidebar-active)',
+        'sidebar-text': 'var(--sidebar-text)',
+        'sidebar-text-active': 'var(--sidebar-text-active)',
+        overlay: 'var(--overlay)',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -30,14 +54,6 @@ module.exports = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -49,6 +65,26 @@ module.exports = {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      fontFamily: {
+        display: ["'Playfair Display'", "Georgia", "serif"],
+        serif: ["'Source Serif 4'", "Georgia", "serif"],
+        sans: ["'Inter'", "system-ui", "sans-serif"],
+        "chinese-serif": ["'Noto Serif SC'", "SimSun", "serif"],
+        "chinese-sans": ["'Noto Sans SC'", "'PingFang SC'", "sans-serif"],
+      },
+      spacing: {
+        'space-1': '0.25rem',
+        'space-2': '0.5rem',
+        'space-3': '0.75rem',
+        'space-4': '1rem',
+        'space-6': '1.5rem',
+        'space-8': '2rem',
+        'space-12': '3rem',
+        'space-16': '4rem',
+        'space-20': '5rem',
+        'space-24': '6rem',
+        'space-32': '8rem',
+      },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",
         lg: "var(--radius)",
@@ -58,6 +94,17 @@ module.exports = {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        editorial: "0 12px 40px rgba(0, 0, 0, 0.08)",
+        'editorial-lg': "0 24px 80px rgba(0, 0, 0, 0.2)",
+      },
+      zIndex: {
+        content: '1',
+        sticky: '10',
+        sidebar: '50',
+        'mobile-menu': '60',
+        overlay: '70',
+        modal: '80',
+        toast: '90',
       },
       keyframes: {
         "accordion-down": {
@@ -72,11 +119,21 @@ module.exports = {
           "0%,70%,100%": { opacity: "1" },
           "20%,50%": { opacity: "0" },
         },
+        "bounce-scroll": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(8px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        "bounce-scroll": "bounce-scroll 2s ease-in-out infinite",
+      },
+      maxWidth: {
+        'page': '1440px',
+        'content': '1200px',
+        'content-wide': '1400px',
       },
     },
   },

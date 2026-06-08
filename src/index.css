@@ -3,7 +3,29 @@
 @tailwind utilities;
 
 @layer base {
+  /* ========== Light Mode (Default) ========== */
   :root {
+    --paper: #FAF8F5;
+    --paper-dark: #F2EDE6;
+    --ink: #1A1A1A;
+    --ink-secondary: #4A4743;
+    --ink-tertiary: #8A8580;
+    --ink-quaternary: #B5B0AA;
+    --accent-rust: #C25B3C;
+    --accent-rust-light: #F5E6E0;
+    --accent-olive: #5A6B5C;
+    --accent-olive-light: #E8EDE9;
+    --accent-gold: #C9A84C;
+    --accent-gold-light: #F5F0E0;
+    --border: #D9D4CE;
+    --border-light: #EBE7E2;
+    --sidebar-bg: #F2EDE6;
+    --sidebar-active: #C25B3C;
+    --sidebar-text: #4A4743;
+    --sidebar-text-active: #FAF8F5;
+    --overlay: rgba(26, 26, 26, 0.45);
+
+    /* shadcn compatibility */
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -20,8 +42,6 @@
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.625rem;
     --sidebar-background: 0 0% 98%;
@@ -32,15 +52,37 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Smooth transition for theme switching */
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
+  /* ========== Dark Mode ========== */
   .dark {
+    --paper: #1A1A1E;
+    --paper-dark: #222228;
+    --ink: #EDEAE5;
+    --ink-secondary: #B5B0AA;
+    --ink-tertiary: #8A8580;
+    --ink-quaternary: #5A5650;
+    --accent-rust: #D47352;
+    --accent-rust-light: #3D2A22;
+    --accent-olive: #7A9B7D;
+    --accent-olive-light: #2A332B;
+    --accent-gold: #D4B85A;
+    --accent-gold-light: #3D3520;
+    --border: #3D3A35;
+    --border-light: #2A2825;
+    --sidebar-bg: #222228;
+    --sidebar-active: #D47352;
+    --sidebar-text: #B5B0AA;
+    --sidebar-text-active: #EDEAE5;
+    --overlay: rgba(0, 0, 0, 0.6);
+
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
     --primary-foreground: 240 5.9% 10%;
     --secondary: 240 3.7% 15.9%;
@@ -54,22 +96,283 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
 
-@layer base {
+  /* ========== Global Typography ========== */
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--ink);
+    background-color: var(--paper);
+    overflow-x: hidden;
+  }
+
+  /* ========== Font Family Classes ========== */
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-serif {
+    font-family: 'Source Serif 4', Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .font-chinese-serif {
+    font-family: 'Noto Serif SC', SimSun, serif;
+  }
+
+  .font-chinese-sans {
+    font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+  }
+
+  /* ========== Type Scale ========== */
+  .text-display-xl {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+
+  .text-display-lg {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .text-display-md {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+  }
+
+  .text-display-sm {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .text-body-xl {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.75;
+  }
+
+  .text-body-lg {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .text-body-md {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  .text-body-sm {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: 0.005em;
+  }
+
+  .text-ui-lg {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  .text-ui-md {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+
+  .text-ui-sm {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .text-drop-cap {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+  }
+
+  .text-volume-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(6rem, 12vw, 10rem);
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+  }
+
+  /* ========== Drop Caps ========== */
+  .drop-cap {
+    float: left;
+    margin-right: 0.75rem;
+    margin-top: 0.25rem;
+    color: var(--accent-rust);
+  }
+
+  /* ========== Pull Quotes ========== */
+  .pull-quote {
+    border-left: 3px solid var(--accent-rust);
+    padding-left: 2rem;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-style: normal;
+    font-size: 0.75rem;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ========== Text Columns ========== */
+  .text-columns {
+    column-count: 1;
+    column-gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .text-columns {
+      column-count: 2;
+    }
+  }
+
+  /* ========== Ornamental Divider ========== */
+  .ornamental-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 3rem auto;
+  }
+
+  .ornamental-divider::before,
+  .ornamental-divider::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background-color: var(--border);
+  }
+
+  .ornamental-divider .diamond {
+    color: var(--accent-rust);
+    font-size: 0.5rem;
+    line-height: 1;
+  }
+
+  /* ========== Section Numbers ========== */
+  .section-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.875rem;
+    color: var(--accent-rust);
+    font-weight: 600;
+  }
+
+  /* ========== Running Headers ========== */
+  .running-header {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.75rem;
+    color: var(--ink-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ========== Smooth Theme Transitions ========== */
+  *,
+  *::before,
+  *::after {
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+  }
+
+  /* ========== Selection ========== */
+  ::selection {
+    background-color: var(--accent-rust);
+    color: var(--paper);
+  }
+
+  /* ========== Scrollbar ========== */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--paper);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-quaternary);
+  }
+
+  /* ========== Link Underline Animation ========== */
+  .link-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-rust);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ========== shadcn border compatibility ========== */
   * {
     @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
