@@ -1,3 +1,6 @@
 node_modules
-dist
+# dist
 .DS_Store
+__pycache__/
+*.log
+data.db
